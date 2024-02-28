@@ -1,5 +1,9 @@
 from app import app
 from flask import render_template, request, redirect, url_for, flash
+from .forms import ContactForm
+from app import mail 
+from flask_mail import Message 
+
 
 
 ###
@@ -56,3 +60,25 @@ def add_header(response):
 def page_not_found(error):
     """Custom 404 page."""
     return render_template('404.html'), 404
+
+
+@app.route('/contact/',  methods=['GET', 'POST'])
+def contact():
+    """Render website's contact page."""
+    form = ContactForm()
+    invalid = ''
+    if form.validate_on_submit():
+        msg = Message(request.form['subject'],sender=request.form['email'],
+                          recipients=["gashara2002@gmail.com"])
+        msg.body = request.form['text_area']
+        
+        try:
+            mail.send(msg) 
+            flash('email was successfully sent')
+            return  redirect('/')
+        except:
+            invalid = 'Invalid Information, please try again'
+            flash('Invalid Information, please try again')
+    else:
+        invalid = 'Invalid Information, please try again'
+    return render_template('contact.html', form = form, invalid = invalid)
