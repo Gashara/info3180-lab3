@@ -1,6 +1,8 @@
+FLASK_DEBUG=True
+FLASK_RUN_PORT=8080
+FLASK_RUN_HOST=0.0.0.0
+SECRET_KEY="ssssssss"
 MAIL_SERVER="sandbox.smtp.mailtrap.io"
-MAIL_PORT=465 # you may need to change this to 25, 587 or 2525
+MAIL_PORT=465 
 MAIL_USERNAME="83a7ad4a821cc2"
 MAIL_PASSWORD="f2f8f15e823b26"
-SECRET_KEY="sksksk"
-7.
